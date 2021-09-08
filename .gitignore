@@ -1,0 +1,39 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# Webpack directories
+.webpack
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea
+*.iml
+
+# ignore .lock
+package-lock.json
+yarn.lock
+
+# Coverage reports
+coverage
+
+# Env
+.env
+
+# Dummy
+lib
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.swp

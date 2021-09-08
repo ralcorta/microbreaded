@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@apis/*": ["apis/*"],
+      "@libs/*": ["libs/*"],
+      // "/opt/nodejs/*": ["libs/*"]
+    }
+  }
+}

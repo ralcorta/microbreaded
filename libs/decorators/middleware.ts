@@ -1,16 +1,20 @@
+import { middyfy } from '@libs/lambda';
+
 export const MiddlewareMetadataSymbol = Symbol.for('microbreaded:middleware:metadata');
-export const TestMethodDecorator = () => (target: Function, propertyKey: string, descriptor: PropertyDescriptor) => {
+export const Use = (middlewares: any | any[]) => (target: any, key: string) => {
+	const methodNames: Record<string, boolean> = Reflect.getMetadata(MiddlewareMetadataSymbol, target) ?? {};
+
+	let method = target[key];
 	try {
-		const originalMethod = descriptor.value;
-
-		descriptor.value = function(...args: any[]) {
-			const result = originalMethod.apply(this, args);
-			return result;
-		};
-
-		return descriptor;
+		if (!methodNames[key]) method = middyfy(method);
+		method.use(middlewares);
 	} catch (error) {
 		console.log(error);
 		throw error;
 	}
+
+	Reflect.metadata(MiddlewareMetadataSymbol, {
+		...methodNames,
+		[target.name]: true
+	})(target);
 };

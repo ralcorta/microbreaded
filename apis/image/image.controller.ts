@@ -1,16 +1,21 @@
 import { success } from '@libs/apiGateway';
 import { Get, Post } from '@libs/decorators/api';
-import { Lambda } from '@libs/decorators/lambda';
+import { Controller } from '@libs/decorators/controller';
 import { ValidatedAPIGatewayProxyEventClassValidator } from '@libs/types';
 import 'source-map-support/register';
 
-@Lambda()
-class ImageModule {
+@Controller()
+class ImageController {
 	@Post({ path: 'upload' })
 	static upload = async ({ body }: ValidatedAPIGatewayProxyEventClassValidator) => {
 		return success({
 			message: `upload ${body.name}, welcome to the exciting Serverless world!`
 		});
+	};
+
+	@Post({ path: 'event' })
+	static getEvent = async (event) => {
+		return success(event);
 	};
 
 	@Get({ path: 'get' })
@@ -21,4 +26,4 @@ class ImageModule {
 	};
 }
 
-export = ImageModule;
+export = ImageController;

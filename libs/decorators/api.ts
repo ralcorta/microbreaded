@@ -25,9 +25,7 @@ const getCallerFilePath = (handleFileNameWithExt?: string): string => {
 		const filePath: string = handleFileNameWithExt
 			? stacks.find((f) => f.getFileName().includes(handleFileNameWithExt))?.getFileName()
 			: stacks[2].getFileName();
-		
 		// stacks.forEach(s => console.log(s.getFileName()))
-		
 		return filePath;
 	} catch (error) {
 		throw new Error(`[MicroBreaded | API] Wrong file path: ${error.message}`);
